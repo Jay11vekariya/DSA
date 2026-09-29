@@ -8,46 +8,51 @@
     Output: 1024.00000
 */
 
-public class Power {
-   public static double myPow(double x, int n) {
+#include <iostream>
+using namespace std;
 
-        // Store n in long because -Integer.MIN_VALUE cannot fit in int
-        long binform = n;
+double myPow(double x, int n)
+{
+    // Store n in long long because -INT_MIN cannot fit in int
+    long long binform = n;
 
-        double ans = 1;
+    double ans = 1;
 
-        // If power is negative:
-        // x^(-n) = (1/x)^n
-        if (binform < 0) {
-            x = 1 / x;
-            binform = -binform;
-        }
-
-        // Binary Exponentiation
-        // Process the exponent using its binary representation
-        while (binform > 0) {
-
-            // If current exponent is odd,
-            // include current x in the answer
-            if (binform % 2 == 1) {
-                ans = ans * x;
-            }
-
-            // Square the base for the next power
-            x = x * x;
-
-            // Divide exponent by 2
-            binform = binform / 2;
-        }
-
-        return ans;
+    // If power is negative:
+    // x^(-n) = (1/x)^n
+    if (binform < 0)
+    {
+        x = 1 / x;
+        binform = -binform;
     }
 
-    public static void main(String args[]){
-        System.out.println(myPow(2,10));
+    // Binary Exponentiation
+    // Process the exponent using its binary representation
+    while (binform > 0)
+    {
+        // If current exponent is odd,
+        // include current x in the answer
+        if (binform % 2 == 1)
+        {
+            ans = ans * x;
+        }
+
+        // Square the base for the next power
+        x = x * x;
+
+        // Divide exponent by 2
+        binform = binform / 2;
     }
+
+    return ans;
 }
 
+int main()
+{
+    cout << myPow(2, 10) << endl;
+
+    return 0;
+}
 
 /*
     Binary Exponentiation (Fast Power):

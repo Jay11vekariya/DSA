@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 
-int maxSubarray4(vector<int>& nums)
+int maxSubarray(vector<int>& nums)
 {
     int currSum = 0;
     int maxSum = INT_MIN;
@@ -31,7 +31,7 @@ int main()
 {
     vector<int> nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
-    cout << "Maximum Sum: " << maxSubarray4(nums);
+    cout << "Maximum Sum: " << maxSubarray(nums);
 
     return 0;
 }

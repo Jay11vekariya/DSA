@@ -9,28 +9,8 @@
 #include <vector>
 using namespace std;
 
-// Brute-Force Approach  [Time-Complexity : O(n*n)]
-void print_Single(vector<int> &vec)
-{
-    for (int i = 0; i < vec.size(); i++)
-    {
-        bool isSingle = true;
-        for (int j = 0; j < vec.size(); j++)
-        {
-            if (i != j && vec[i] == vec[j])
-            {
-                isSingle = false;
-            }
-        }
-        if (isSingle)
-        {
-            cout << vec[i] << " ";
-        }
-    }
-}
-
 // Optimal Approach [Time-Complexity : O(n)]
-void print_Single2(vector<int> &vec)
+void print_Single(vector<int> &vec)
 {
     int ans = 0;
     for (int val : vec)
@@ -79,10 +59,7 @@ void print_Single2(vector<int> &vec)
 
 int main()
 {
-
     vector<int> vec = {4, 1, 3, 1, 3};
     print_Single(vec);
-    print_Single2(vec);
-
     return 0;
 }

@@ -10,30 +10,8 @@
 #include <vector>
 using namespace std;
 
-// Brute-Force Approach
-// Time Complexity: O(n^2) | Space Complexity: O(1) excluding the returned vector
-vector<int> pairSum(vector<int> &nums, int target)
-{
-    vector<int> ans;
-
-    for (int i = 0; i < nums.size(); i++)
-    {
-        for (int j = i + 1; j < nums.size(); j++)
-        {
-            if (nums[i] + nums[j] == target)
-            {
-                ans.push_back(i);
-                ans.push_back(j);
-                return ans;
-            }
-        }
-    }
-
-    return ans;
-}
-
 // Optimal Approach -- Two Pointers Approach
-vector<int> pairSum2(vector<int> &nums, int target)
+vector<int> pairSum(vector<int> &nums, int target)
 {
     vector<int> ans;
 
@@ -67,7 +45,7 @@ int main()
 {
     vector<int> nums = {2, 5, 6, 7};
 
-    vector<int> ans = pairSum2(nums, 11);
+    vector<int> ans = pairSum(nums, 11);
 
     if (ans.size() == 2)
     {

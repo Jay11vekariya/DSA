@@ -12,36 +12,44 @@
     Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
 */
 
-public class Stock {
-    public static int maxProfit(int[] prices) {
+#include <iostream>
+#include <vector>
+using namespace std;
 
-        int buyPrice = prices[0]; // Minimum price seen so far
-        int maxProfit = 0;        // Maximum profit found so far
+int maxProfit(vector<int> prices)
+{
+    if (prices.empty())
+        return 0;
 
-        for (int i = 1; i < prices.length; i++) {
+    int buyPrice = prices[0]; // Minimum price seen so far
+    int maxProfit = 0;        // Maximum profit found so far
 
-            if (prices[i] > buyPrice) {
+    for (size_t i = 1; i < prices.size(); i++)
+    {
+        if (prices[i] > buyPrice)
+        {
+            // Sell today and calculate profit
+            int currProfit = prices[i] - buyPrice;
 
-                // Sell today and calculate profit
-                int currProfit = prices[i] - buyPrice;
-
-                // Update maximum profit
-                maxProfit = Math.max(maxProfit, currProfit);
-            }
-            else {
-                // Found a cheaper buying price
-                buyPrice = prices[i];
-            }
+            // Update maximum profit
+            maxProfit = max(maxProfit, currProfit);
         }
+        else
+        {
+            // Found a cheaper buying price
+            buyPrice = prices[i];
+        }
+    }
 
-        return maxProfit;
-    }
-    public static void main(String args[]){
-        int prices[] = {7,1,5,3,6,4};
-        System.out.println(maxProfit(prices));
-    }
+    return maxProfit;
 }
 
+int main()
+{
+    vector prices = {7, 1, 5, 3, 6, 4};
+    cout << maxProfit(prices) << endl;
+    return 0;
+}
 
 /*
     Best Time to Buy and Sell Stock - Optimal Approach
