@@ -1,8 +1,8 @@
 /*
 
-    [Search in Rotated Sorted Array]
+    33. [Search in Rotated Sorted Array]
 
-    Given an integer array nums containing distinct elements, which was originally sorted in ascending order but may have been 
+    Given an integer array nums containing distinct elements, which was originally sorted in ascending order but may have been
     rotated at an unknown index, and an integer target, find the index of target in the array.
     If the target exists, return its index. Otherwise, return -1.
     The solution must have a time complexity of O(log n).
@@ -13,59 +13,71 @@
 
 */
 
+#include <iostream>
+#include <vector>
+using namespace std;
 
-public class Search {
+int search(vector<int> &nums, int target)
+{
+    int low = 0;
+    int high = nums.size() - 1; // Last valid index
 
-    public static int search(int[] nums, int target) {
+    while (low <= high)
+    {
+        // Calculate middle index safely to avoid integer overflow
+        int mid = low + (high - low) / 2;
 
-        int low = 0;
-        int high = nums.length - 1; // Last valid index
+        // Target found
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
 
-        while (low <= high) {
-
-            int mid = low + (high - low) / 2;
-
-            // Target found
-            if (nums[mid] == target) {
-                return mid;
+        // CHeck for Left half is sorted
+        if (nums[low] <= nums[mid])
+        {
+            // Target lies inside the sorted left half
+            if (target >= nums[low] && target < nums[mid])
+            {
+                high = mid - 1;
             }
 
-            // Left half is sorted
-            if (nums[low] <= nums[mid]) {
-
-                // Target lies inside the sorted left half
-                if (target >= nums[low] && target < nums[mid]) {
-                    high = mid - 1;
-                }
-                // Target lies in the other half
-                else {
-                    low = mid + 1;
-                }
-            }
-
-            // Otherwise, right half is sorted
-            else {
-
-                // Target lies inside the sorted right half
-                if (target > nums[mid] && target <= nums[high]) {
-                    low = mid + 1;
-                }
-                // Target lies in the other half
-                else {
-                    high = mid - 1;
-                }
+            // Target lies in the other half
+            else
+            {
+                low = mid + 1;
             }
         }
 
-        // Target does not exist
-        return -1;
+        // Otherwise, right half is sorted
+        else
+        {
+            // Target lies inside the sorted right half
+            if (target > nums[mid] && target <= nums[high])
+            {
+                low = mid + 1;
+            }
+
+            // Target lies in the other half
+            else
+            {
+                high = mid - 1;
+            }
+        }
     }
 
-    public static void main(String args[]) {
-        int nums[] = { 5, 6, 7, 2, 3, 4 };
-        int target = 3;
-        System.out.println(search(nums, target));
-    }
+    // Target does not exist
+    return -1;
+}
+
+int main()
+{
+    vector<int> nums = {6, 7, 0, 1, 2, 3, 4, 5};
+    int target = 3;
+
+    cout << search(nums, target) << endl;
+
+    return 0;
 }
 
 /*
